@@ -31,7 +31,11 @@ startBtn.addEventListener("click", function(e){
     intro.classList.add("hidden");
     main.classList.remove("no-opac");
     soundControls.classList.remove("hidden");
-    bgMusic.play();
+    bgMusic.currentTime = 0;
+    bgMusic.volume = 1;
+    if(musicOn){
+        bgMusic.play();      
+    }
 });
 
 //toggle music
@@ -74,9 +78,6 @@ function playSound(sound){
     }
 }
 
-let openS = new Audio("sounds/open.mp3");
-let closeS = new Audio("sounds/close.mp3");
-
 //when click collapse change arrow direction and menu position
 collapse.addEventListener("click", function(e){
     menuRect = menu.getBoundingClientRect();
@@ -84,13 +85,10 @@ collapse.addEventListener("click", function(e){
         collapse.firstElementChild.classList.remove("right-arrow");
         collapse.firstElementChild.classList.add("left-arrow");
         menu.style.left = "0px";
-        // playSound(openS);
     }else{
         collapse.firstElementChild.classList.remove("left-arrow");
         collapse.firstElementChild.classList.add("right-arrow");
         menu.style.left = "calc(-" + menuRect.width + "px)";
-        closeS.volume = 1;
-        // playSound(closeS);
     }
 });
 
@@ -119,8 +117,6 @@ let grid1Width = 10; //big room width
 let grid2Width = 6; //small room width
 
 let gridHeight = 4; //room height
-
-// let curGridWidth = 0; //current width of grid being placed into
 
 let deleteBtn = document.getElementById("delete");
 
@@ -216,7 +212,6 @@ let trash = new Audio("sounds/trash.mp3");
 //set up all menu item move on mousedown event and images
 for(let i=0; i<menuItems.length; i++){
 
-    // menuItems[i].style.backgroundImage = "url('images/" + menuItems[i].dataset.id + ".png')";
     let img = document.createElement("img");
     img.src = "images/" + menuItems[i].dataset.id + ".png";
     img.loading = "lazy";
@@ -241,8 +236,6 @@ for(let i=0; i<menuItems.length; i++){
             collapse.firstElementChild.classList.remove("left-arrow");
             collapse.firstElementChild.classList.add("right-arrow");
             menu.style.left = "calc(-" + menuRect.width + "px)";
-            closeS.volume = 0.5;
-            // playSound(closeS);
 
             //create and style item
             newItem = document.createElement("div");
@@ -337,6 +330,7 @@ document.addEventListener("mouseup", function(e){
         newItem.dataset.y = prevY;
         newItem.dataset.gridW = prevGridW;
         newItem.dataset.room = prevRoom;
+        newItem.classList.remove("front");
 
         //set boxes item occupies as not empty
         for(let j=0; j<newItem.dataset.h; j++){
@@ -525,7 +519,6 @@ for(let i=0; i<bgRooms.length; i++){
             bgPatterns[j].classList.remove("pattern-selected");
         }
         document.getElementById(curBgPattern).classList.add("pattern-selected");
-        // console.log(document.getElementById(curBgPattern));
 
     });
 }
@@ -610,7 +603,7 @@ function displayPattern(curRoom, curBgPattern, curCol){
     //solid
     if(curBgPattern == "solid"){
         if(curCol == "#ddd"){
-            curRoom.style.backgroundColor = "#fff"
+            curRoom.style.backgroundColor = "#fff";
         }else{
             curRoom.style.backgroundColor = curCol;
         }
@@ -647,7 +640,6 @@ function displayPattern(curRoom, curBgPattern, curCol){
 let doneBtn = document.getElementById("done-btn");
 let resultsPage = document.getElementById("results-page");
 let resultsContent = document.getElementById("results-content");
-// let colArr = ["pink","red","orange","yellow","green","blue","purple","white","black","purple"];
 
 let mainHeading = document.getElementById("heading");
 let backgroundSelect = document.getElementById("background-select");
@@ -655,7 +647,9 @@ let backgroundSelect = document.getElementById("background-select");
 let resultsBar = document.getElementById("results-bar");
 
 let loading = document.getElementById("loading");
-let progressBarIn = document.getElementById("progress-bar-in");
+let progressBarOut = document.getElementById("progress-bar-out");
+
+let playagainBtn = document.getElementById("playagain-btn");
 
 
 doneBtn.addEventListener("click", function(e){
@@ -670,11 +664,16 @@ doneBtn.addEventListener("click", function(e){
 
     //progress bar
     let count = 0;
+    let newProgBar = document.createElement("div");
+    newProgBar.id = "progress-bar-in";
+    newProgBar.classList.add("prog-bar");
+    progressBarOut.appendChild(newProgBar);
+
     setInterval(function(){
         if(count < 100){
             count++;
         }
-        progressBarIn.style.width = count + "%";
+        newProgBar.style.width = count + "%";
     }, 26);
 
     //after finished "loading"
@@ -685,8 +684,11 @@ doneBtn.addEventListener("click", function(e){
             behavior: "smooth"
         });
 
+        newProgBar.remove();
+
         curMusic = "result";
         if(musicOn){
+            resultMusic.currentTime = 0;
             resultMusic.play();
         }
         bgMusic.pause();
@@ -702,6 +704,7 @@ doneBtn.addEventListener("click", function(e){
         menu.classList.add("hidden");
     
         resultsPage.classList.remove("hidden");
+        playagainBtn.classList.remove("hidden");
     
         items = document.querySelectorAll(".item")
     
@@ -855,7 +858,6 @@ doneBtn.addEventListener("click", function(e){
     
                             //check if the id of the option is the same as the id of this item and that this sentence base hasn't been used yet
                             if(type in data){
-                                console.log("yes")
                                 if (data[type][k]["id"] == id && !bases.includes(data[type][k]["base"])){
                                     bases.push(data[type][k]["base"]); //store this sentence base
                                     colText[final[i][0]] += " " + data[type][k]["final"]; //add this sentence to this color's text
@@ -902,6 +904,87 @@ doneBtn.addEventListener("click", function(e){
     }, 3000);
 
     
+
+});
+
+
+playagainBtn.addEventListener("click", function(e){
+    //reset sounds
+    curMusic = "bg";
+    resultMusic.pause();
+
+    intro.classList.remove("hidden");
+    soundControls.classList.add("hidden");
+    sfxBtn.classList.remove("hidden");
+    
+    //main game reset
+    main.classList.add("no-opac");
+    mainHeading.classList.remove("hidden");
+    backgroundSelect.classList.remove("hidden");
+    doneBtn.classList.remove("hidden");
+    menu.classList.remove("hidden");
+    main.classList.remove("no-pointer-e");
+
+    menu.style.left = "calc(-" + menuRect.width + "px)";
+
+    //remove all items
+    let clearItems = document.querySelectorAll(".item");
+    for(let i=0; i<clearItems.length; i++){
+        clearItems[i].remove();
+    }
+
+    //set boxes to empty
+    for(let i=0; i<boxes.length; i++){
+        boxes[i].dataset.empty = true;
+    } 
+
+    //resetting background colors and patterns
+    curBgRoom = "1";
+    curBgPattern = "solid";
+    colorIds = [0,0,0,0];
+
+    //room menu selection reset
+    for(let i=0; i<bgRooms.length; i++){
+        bgRooms[i].classList.remove("room-selected");
+    }
+    bgRooms[0].classList.add("room-selected");
+
+    for(let i=0; i<bgPatterns.length; i++){
+        bgPatterns[i].classList.remove("pattern-selected");
+    }
+    bgPatterns[0].classList.add("pattern-selected");
+
+    for(let i=0; i<bgColors.length; i++){
+        bgColors[i].classList.remove("color-selected");
+    }
+    bgColors[0].classList.add("color-selected");
+
+    //reset appearance
+    for(let i=1; i<5; i++){
+        let curRoom = document.getElementById("grid"+i);
+        displayPattern(curRoom, "solid", "#ddd");
+        curRoom.classList.remove("stripe");
+        curRoom.classList.remove("dot");
+        curRoom.classList.remove("checker");
+        curRoom.classList.add("solid");
+        curRoom.dataset.pattern = "solid";
+    }
+
+    //result reset
+    resultsPage.classList.add("hidden");
+    playagainBtn.classList.add("hidden");
+
+    //remove all bars
+    let clearBars = document.querySelectorAll("#results-bar div");
+    for(let i=0; i<clearBars.length; i++){
+        clearBars[i].remove();
+    }
+
+    //remove all color results
+    let clearResults = document.querySelectorAll(".color-result");
+    for(let i=0; i<clearResults.length; i++){
+        clearResults[i].remove();
+    }
 
 });
 

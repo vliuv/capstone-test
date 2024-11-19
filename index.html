@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Game</title>
+    <title>My Cozy Apartment</title>
     <link rel="stylesheet" href="styles.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Unica+One&display=swap" rel="stylesheet">
+
+    <meta name="author" content="Victoria Liu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Cozy Apartment - a home decoration personality quiz game">
   </head>
   <body>
 
@@ -68,7 +72,7 @@
       </div>
 
       <div id="credits">
-        <p>Thank you to Kathryn Lee, Clarissa Pace, and Kaitlyn Zou for contributing to the 570 unique possible sentences.</p>
+        <p>Thank you to Kathryn Lee, Clarissa Pace, and Kaitlyn Zou for contributing to the 570 possible result sentences.</p>
         <p>Background music by ZHRØ on Freesound.org.</p>
       </div>
 
@@ -78,9 +82,7 @@
       <div id="loading-heading">
         <h1 class="title-font">Generating Your Results...</h1>
       </div>
-      <div id="progress-bar-out">
-        <div id="progress-bar-in"></div>
-      </div>
+      <div id="progress-bar-out"></div>
     </div>
 
     <div id="main" class="no-opac">
@@ -822,6 +824,12 @@
         </div>
       </div>
 
+    </div>
+
+    <div id="playagain-btn-cont">
+      <div id="playagain-btn" class="hidden">
+        <p class="title-font">Play Again</p>
+      </div>
     </div>
 
     <div id="sound-controls" class="hidden">

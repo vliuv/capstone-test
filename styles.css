@@ -1,5 +1,4 @@
 body{
-    /* font-size: 8pt; */
     font-family: "Fira Mono", monospace;
     background-color: #E0E0E0;
 }
@@ -63,8 +62,6 @@ body{
 #heading-cont{
     background-color: #CCC;
     border: 10px solid #999;
-    /* border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%); */
-    /* border-image-slice: 1; */
     width: 60%;
     max-width: 600px;
     padding: 40px;
@@ -125,7 +122,6 @@ h1{
 }
 
 #heading p{
-    /* margin: 0px 60px 40px 60px; */
     width: 640px;
     margin: auto;
     margin-bottom: 40px;
@@ -151,12 +147,7 @@ h1{
     outline: 2px solid black;
     display: flex;
     flex-wrap: wrap;
-    /* box-sizing: border-box; */
-    /* width: 320px; */
-    /* margin-left: 50px; */
-    /* margin: auto; */
     position: relative;
-    /* top: 20px; */
     z-index: 200;
     background-color: white;
 }
@@ -182,7 +173,6 @@ h1{
 .box{
     width: 40px;
     height: 40px;
-    /* flex: 0 0 12.5%; */
     box-sizing: border-box;
     z-index: 100;
 }
@@ -192,9 +182,6 @@ h1{
 }
 
 #menu{
-    /* display: flex;
-    flex-direction: column;
-    gap: 10px; */
     width: fit-content;
     position: absolute;
     left: -100%;
@@ -205,7 +192,6 @@ h1{
 
 #tabs{
     display: flex;
-    /* border: 1px solid grey; */
 }
 
 .tab{
@@ -245,12 +231,6 @@ h1{
 }
 
 .menu-item{
-    /* width: 40px;
-    height: 40px; */
-    /* position: absolute; */
-    /* background-size: 100%;
-    background-repeat: no-repeat;
-    object-fit: contain; */
     background-color: none;
     cursor: grab;
 }
@@ -335,7 +315,6 @@ h1{
 
 #background-select{
     width: 652px;
-    /* height: 80px; */
     border: 4px solid black;
     box-sizing: border-box;
     margin: auto;
@@ -362,9 +341,6 @@ h1{
 }
 
 .bg-room{
-    /* width: 40px; */
-    /* height: 40px; */
-    /* background-color: white; */
     font-size: 14px;
     border: 2px solid transparent;
     padding: 4px;
@@ -383,7 +359,6 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 6px;
-    /* flex: 2; */
 }
 
 .color-row{
@@ -394,8 +369,6 @@ h1{
 }
 
 .bg-color{
-    /* height: 100%;
-    width: 100%; */
     height: 28.5px;
     width: 28.5px;
     background-color: white;
@@ -416,14 +389,12 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 6px;
-    /* flex: 0.5; */
 }
 
 .pattern-row{
     display: flex;
     flex-direction: row;
     gap: 10px;
-    /* flex: 0.5; */
 }
 
 .bg-pattern{
@@ -555,7 +526,6 @@ h1{
     margin: auto;
     margin-top: 40px;
     border: 4px solid #555;
-    /* height: 20px; */
 }
 
 #progress-bar-in{
@@ -598,7 +568,6 @@ h1{
 }
 
 #results-bar{
-    /* width: 100%; */
     display: flex;
     margin: 10px 30px;
 }
@@ -607,7 +576,6 @@ h1{
     height: 30px;
     font-size: 12px;
     padding-left: 6px;
-    /* padding-top: 2px; */
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -616,12 +584,10 @@ h1{
 
 #results-bar div:hover:not(.active-bar){
     border-color: #888;
-    /* font-weight: bold; */
 }
 
 #results-bar div.active-bar{
     border-color: #555;
-    /* font-weight: bold; */
 }
 
 .color-result{
@@ -637,7 +603,6 @@ h1{
 .percent-sq{
     width: 15px;
     height: 15px;
-    /* background-color: white; */
     display: inline-block;
 }
 
@@ -659,6 +624,32 @@ h1{
 #credits p{
     margin: 2px 0px;
 }
+
+#playagain-btn{
+    text-align: center;
+    margin: auto; 
+    margin-bottom: 60px;
+    font-size: 20px;
+    background-color: #A9A9A9;
+    border-bottom: 4px solid #555;
+    width: fit-content;
+    padding: 10px 20px;
+}
+
+#playagain-btn:hover{
+    background-color: #888;
+    cursor: pointer;
+}
+
+#playagain-btn:hover > p{
+    color: white;
+}
+
+#playagain-btn p{
+    margin: 0;
+    font-weight: bold;
+}
+
 
 
 
@@ -691,7 +682,6 @@ h1{
 
 .front{
     z-index: 1000;
-    /* background-color: rgb(0,0,0,0.15); */
 }
 
 .hidden{
